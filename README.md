@@ -116,29 +116,26 @@ The initial repository is expected to evolve approximately as follows:
 
 ```text
 SCOUT/
-├── README.md
+│
 ├── data/
-│   ├── README.md
-│   ├── raw/
-│   ├── processed/
-│   └── synthetic/
+│   └── .gitkeep
+│
 ├── notebooks/
-│   ├── 01_data_exploration/
-│   ├── 02_feature_engineering/
-│   ├── 03_risk_model/
-│   └── 04_evaluation/
-├── src/
-│   ├── backend/
-│   ├── frontend/
-│   ├── risk_engine/
-│   ├── data_ingestion/
-│   └── ai/
-├── docs/
-│   ├── architecture/
-│   ├── methodology/
-│   └── course_deliverables/
-├── tests/
-└── .gitignore
+│   └── .gitkeep
+│
+├── documentation/
+│   ├── .gitkeep
+│   └── deliverables/
+│       ├── week-01/
+│       │   └── .gitkeep
+│       ├── week-02/
+│       │   └── .gitkeep
+│       ├── week-08/
+│       │   └── .gitkeep
+│       └── week-09/
+│           └── .gitkeep
+│
+└── README.md
 ```
 
 Credentials, API keys, passwords, tokens, confidential company information, and unauthorized data must **not** be committed to the repository.
