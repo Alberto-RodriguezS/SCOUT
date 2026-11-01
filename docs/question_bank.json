@@ -1,0 +1,1261 @@
+[
+  {
+    "id": "S1",
+    "code": "G5",
+    "areas": [
+      "P"
+    ],
+    "link": "proc",
+    "module": "Third-party & vendor",
+    "isNew": false,
+    "question_plain": "Is any critical input bought from only one supplier?",
+    "question_technical": "Do you have single-source dependencies for critical inputs?",
+    "options": [
+      {
+        "plain": "Yes",
+        "technical": "Yes, for critical items",
+        "risk": 0.9
+      },
+      {
+        "plain": "For some items",
+        "technical": "Partial single-sourcing",
+        "risk": 0.6
+      },
+      {
+        "plain": "No, we have several",
+        "technical": "No, multi-sourced",
+        "risk": 0.2
+      }
+    ],
+    "pain": "A critical input depends on one supplier",
+    "why": "Cyber incidents travel through suppliers. A single source turns their outage into yours.",
+    "statement": "A critical input depends on one supplier. Cyber incidents travel through suppliers. A single source turns their outage into yours."
+  },
+  {
+    "id": "S2",
+    "code": "A1",
+    "areas": [
+      "P",
+      "D"
+    ],
+    "link": "prod",
+    "module": "Technology assets",
+    "isNew": false,
+    "question_plain": "How much do daily operations depend on digital systems like ordering, scheduling or payments?",
+    "question_technical": "What is the operational dependency on IT systems (ERP, MES, TMS, payments)?",
+    "options": [
+      {
+        "plain": "Almost everything stops without them",
+        "technical": "Critical, no degraded mode",
+        "risk": 0.85
+      },
+      {
+        "plain": "Some things keep going",
+        "technical": "Partial dependency",
+        "risk": 0.5
+      },
+      {
+        "plain": "Very little",
+        "technical": "Low dependency",
+        "risk": 0.2
+      }
+    ],
+    "pain": "Most work stops when systems stop",
+    "why": "The more work runs on systems, the faster an IT outage becomes a stopped operation.",
+    "statement": "Most work stops when systems stop. The more work runs on systems, the faster an IT outage becomes a stopped operation."
+  },
+  {
+    "id": "S3",
+    "code": "F5",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Data & backups",
+    "isNew": false,
+    "question_plain": "Are important data backed up, and have you restored from a backup in the last 12 months?",
+    "question_technical": "Are critical data backed up with a successful restore test in the last 12 months?",
+    "options": [
+      {
+        "plain": "Yes, and we tested a restore",
+        "technical": "Backed up, restore tested",
+        "risk": 0.1
+      },
+      {
+        "plain": "Backed up, never restored",
+        "technical": "Backups untested",
+        "risk": 0.7
+      },
+      {
+        "plain": "No regular backups",
+        "technical": "No backups",
+        "risk": 1
+      }
+    ],
+    "pain": "Backups have not been proven to restore",
+    "why": "A backup that was never restored is a guess. Most ransomware recoveries fail at this step.",
+    "statement": "Backups have not been proven to restore. A backup that was never restored is a guess. Most ransomware recoveries fail at this step."
+  },
+  {
+    "id": "S4",
+    "code": "A3",
+    "areas": [
+      "D",
+      "P"
+    ],
+    "link": "org",
+    "module": "Third-party & vendor",
+    "isNew": false,
+    "question_plain": "Can suppliers, carriers or IT vendors log in to your systems or equipment from outside?",
+    "question_technical": "Is third-party remote access enabled to your systems or OT assets?",
+    "options": [
+      {
+        "plain": "Yes, always on",
+        "technical": "Permanent remote access",
+        "risk": 0.9
+      },
+      {
+        "plain": "Only when we open it",
+        "technical": "On-demand access",
+        "risk": 0.45
+      },
+      {
+        "plain": "No",
+        "technical": "No remote access",
+        "risk": 0.1
+      }
+    ],
+    "pain": "Outside companies have always-on access",
+    "why": "Always-on vendor access is one of the most common entry points in supply-chain incidents.",
+    "statement": "Outside companies have always-on access. Always-on vendor access is one of the most common entry points in supply-chain incidents."
+  },
+  {
+    "id": "S5",
+    "code": "H1",
+    "areas": [
+      "D",
+      "F"
+    ],
+    "link": "org",
+    "module": "Identity & access",
+    "isNew": false,
+    "question_plain": "Do people need a second step (a code or app) to sign in to email and business systems?",
+    "question_technical": "Is MFA enforced for email and business-critical applications?",
+    "options": [
+      {
+        "plain": "Yes, for everyone",
+        "technical": "MFA enforced for all",
+        "risk": 0.1
+      },
+      {
+        "plain": "For some people or systems",
+        "technical": "Partial MFA coverage",
+        "risk": 0.6
+      },
+      {
+        "plain": "No",
+        "technical": "No MFA",
+        "risk": 1
+      }
+    ],
+    "pain": "Sign-in relies on a password alone",
+    "why": "A stolen password alone opens email, and email is how fake invoices and payment changes arrive.",
+    "statement": "Sign-in relies on a password alone. A stolen password alone opens email, and email is how fake invoices and payment changes arrive."
+  },
+  {
+    "id": "S6",
+    "code": "I3",
+    "areas": [
+      "P"
+    ],
+    "link": "org",
+    "module": "Detection & response",
+    "isNew": false,
+    "question_plain": "Is there an agreed plan for who decides what when a cyber incident disrupts operations?",
+    "question_technical": "Is there a documented incident-response playbook that includes operations and supply-chain stakeholders?",
+    "options": [
+      {
+        "plain": "Yes, and we have practiced it",
+        "technical": "Documented and exercised",
+        "risk": 0.1
+      },
+      {
+        "plain": "Written but never practiced",
+        "technical": "Documented, not tested",
+        "risk": 0.5
+      },
+      {
+        "plain": "Informal, people would figure it out",
+        "technical": "Informal",
+        "risk": 0.8
+      },
+      {
+        "plain": "No plan",
+        "technical": "None",
+        "risk": 1
+      }
+    ],
+    "pain": "No agreed plan for a cyber disruption",
+    "why": "Without agreed roles, the first hours go to arguing about who decides, while trucks and lines wait.",
+    "statement": "No agreed plan for a cyber disruption. Without agreed roles, the first hours go to arguing about who decides, while trucks and lines wait."
+  },
+  {
+    "id": "S7",
+    "code": "G6",
+    "areas": [
+      "P"
+    ],
+    "link": "proc",
+    "module": "Third-party & vendor",
+    "isNew": true,
+    "question_plain": "Do you ask critical suppliers how they would keep working through a cyber incident?",
+    "question_technical": "Are critical suppliers assessed for cyber continuity in onboarding or reviews?",
+    "options": [
+      {
+        "plain": "Yes, as a routine",
+        "technical": "Routine assessment",
+        "risk": 0.2
+      },
+      {
+        "plain": "For some suppliers",
+        "technical": "Ad hoc",
+        "risk": 0.5
+      },
+      {
+        "plain": "Never",
+        "technical": "Not assessed",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Suppliers' cyber continuity is unknown",
+    "why": "You inherit your suppliers' recovery time. Asking is the cheapest way to find out what it is.",
+    "statement": "Suppliers' cyber continuity is unknown. You inherit your suppliers' recovery time. Asking is the cheapest way to find out what it is."
+  },
+  {
+    "id": "S8",
+    "code": "FIN1",
+    "areas": [
+      "F"
+    ],
+    "link": "proc",
+    "module": "Finance & payments",
+    "isNew": true,
+    "question_plain": "When a supplier asks to change its bank account, do you confirm by calling a number you already had?",
+    "question_technical": "Are supplier bank-detail change requests verified out-of-band against known contact data?",
+    "options": [
+      {
+        "plain": "Always",
+        "technical": "Always verified out-of-band",
+        "risk": 0.1
+      },
+      {
+        "plain": "Sometimes",
+        "technical": "Inconsistent",
+        "risk": 0.6
+      },
+      {
+        "plain": "No, an email or letter is enough",
+        "technical": "No verification",
+        "risk": 1
+      }
+    ],
+    "pain": "Bank-detail changes are accepted without a call-back",
+    "why": "Fake bank-detail changes from look-alike supplier emails are among the most frequent supply-chain frauds.",
+    "statement": "Bank-detail changes are accepted without a call-back. Fake bank-detail changes from look-alike supplier emails are among the most frequent supply-chain frauds."
+  },
+  {
+    "id": "S9",
+    "code": "C1",
+    "areas": [
+      "P"
+    ],
+    "link": "main",
+    "module": "Operational impact",
+    "isNew": false,
+    "question_plain": null,
+    "question_technical": null,
+    "options": [
+      {
+        "plain": "We stop",
+        "technical": "Hard stop",
+        "risk": 0.9
+      },
+      {
+        "plain": "We work on paper for a while",
+        "technical": "Degraded manual mode",
+        "risk": 0.5
+      },
+      {
+        "plain": "A backup takes over",
+        "technical": "Failover available",
+        "risk": 0.1
+      }
+    ],
+    "pain": "The main process has no working fallback",
+    "why": "This is the process you named as hardest to lose. Its fallback decides how an incident feels on the floor.",
+    "statement": "The main process has no working fallback. This is the process you named as hardest to lose. Its fallback decides how an incident feels on the floor."
+  },
+  {
+    "id": "C2",
+    "code": "C2",
+    "areas": [
+      "P"
+    ],
+    "link": "main",
+    "module": "Operational impact",
+    "isNew": false,
+    "question_plain": "How long can your most critical process be down before the damage is serious?",
+    "question_technical": "What is the maximum tolerable downtime of the most critical process?",
+    "options": [
+      {
+        "plain": "Less than an hour",
+        "technical": "< 1 h",
+        "risk": 0.9
+      },
+      {
+        "plain": "A few hours",
+        "technical": "1 to 8 h",
+        "risk": 0.7
+      },
+      {
+        "plain": "One to three days",
+        "technical": "1 to 3 days",
+        "risk": 0.4
+      },
+      {
+        "plain": "More than three days",
+        "technical": "> 3 days",
+        "risk": 0.2
+      }
+    ],
+    "pain": "Very little time before damage is serious",
+    "why": "This sets the clock. Every recovery answer is compared against it.",
+    "statement": "Very little time before damage is serious. This sets the clock. Every recovery answer is compared against it."
+  },
+  {
+    "id": "E1",
+    "code": "E1",
+    "areas": [
+      "P",
+      "D"
+    ],
+    "link": "org",
+    "module": "Recovery & continuity",
+    "isNew": false,
+    "question_plain": "Realistically, how long would it take to get that process working again?",
+    "question_technical": "What is the practical recovery time (RTO) for that process?",
+    "options": [
+      {
+        "plain": "Hours",
+        "technical": "Hours",
+        "risk": 0.2
+      },
+      {
+        "plain": "One to three days",
+        "technical": "1 to 3 days",
+        "risk": 0.5
+      },
+      {
+        "plain": "A week or more",
+        "technical": "≥ 1 week",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Recovery takes longer than a week",
+    "why": "Compared with tolerable downtime, this shows whether recovery is fast enough.",
+    "statement": "Recovery takes longer than a week. Compared with tolerable downtime, this shows whether recovery is fast enough."
+  },
+  {
+    "id": "F3",
+    "code": "F3",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Data & backups",
+    "isNew": false,
+    "question_plain": "Are backups kept somewhere an attacker inside your network could not delete them?",
+    "question_technical": "Are critical backups offline, isolated or immutable?",
+    "options": [
+      {
+        "plain": "Yes, offline or locked",
+        "technical": "Offline / immutable",
+        "risk": 0.1
+      },
+      {
+        "plain": "Some of them",
+        "technical": "Partially isolated",
+        "risk": 0.5
+      },
+      {
+        "plain": "No, same network",
+        "technical": "Same network",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Backups sit on the same network",
+    "why": "Attackers delete reachable backups first, then encrypt.",
+    "statement": "Backups sit on the same network. Attackers delete reachable backups first, then encrypt."
+  },
+  {
+    "id": "G1",
+    "code": "G1",
+    "areas": [
+      "D",
+      "P"
+    ],
+    "link": "org",
+    "module": "Third-party & vendor",
+    "isNew": false,
+    "question_plain": "Do you know which outside companies can access your systems?",
+    "question_technical": "Is there a maintained inventory of third parties with system access?",
+    "options": [
+      {
+        "plain": "Yes, we keep a list",
+        "technical": "Maintained inventory",
+        "risk": 0.15
+      },
+      {
+        "plain": "Roughly",
+        "technical": "Partial",
+        "risk": 0.5
+      },
+      {
+        "plain": "No",
+        "technical": "No inventory",
+        "risk": 0.9
+      }
+    ],
+    "pain": "No list of who can get in from outside",
+    "why": "You cannot close a door you do not know is open.",
+    "statement": "No list of who can get in from outside. You cannot close a door you do not know is open."
+  },
+  {
+    "id": "FIN2",
+    "code": "FIN2",
+    "areas": [
+      "F"
+    ],
+    "link": "proc",
+    "module": "Finance & payments",
+    "isNew": true,
+    "question_plain": "Do large or unusual payments need a second person to approve them?",
+    "question_technical": "Is dual approval enforced for high-value or anomalous payments?",
+    "options": [
+      {
+        "plain": "Always",
+        "technical": "Enforced dual control",
+        "risk": 0.1
+      },
+      {
+        "plain": "Only above a limit",
+        "technical": "Threshold-based",
+        "risk": 0.4
+      },
+      {
+        "plain": "No",
+        "technical": "Single approver",
+        "risk": 0.9
+      }
+    ],
+    "pain": "One person can release a large payment",
+    "why": "A second approver stops most fraudulent transfers, even when the request looks genuine.",
+    "statement": "One person can release a large payment. A second approver stops most fraudulent transfers, even when the request looks genuine."
+  },
+  {
+    "id": "I2",
+    "code": "I2",
+    "areas": [
+      "P"
+    ],
+    "link": "org",
+    "module": "Detection & response",
+    "isNew": false,
+    "question_plain": "Is there a named person who can decide to stop or slow operations during a cyber incident?",
+    "question_technical": "Is authority to degrade or halt operations during an incident assigned?",
+    "options": [
+      {
+        "plain": "Yes, and people know who",
+        "technical": "Assigned and known",
+        "risk": 0.15
+      },
+      {
+        "plain": "Probably, but not written",
+        "technical": "Implicit",
+        "risk": 0.55
+      },
+      {
+        "plain": "No",
+        "technical": "Unassigned",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Nobody is named to stop operations",
+    "why": "Stopping early can limit spread, but only someone with authority will do it.",
+    "statement": "Nobody is named to stop operations. Stopping early can limit spread, but only someone with authority will do it."
+  },
+  {
+    "id": "H4",
+    "code": "H4",
+    "areas": [
+      "D",
+      "P"
+    ],
+    "link": "prod",
+    "module": "Identity & network",
+    "isNew": false,
+    "question_plain": "If someone got into your office computers, could they reach the machines that run production?",
+    "question_technical": "Can corporate IT networks directly reach OT/production systems?",
+    "options": [
+      {
+        "plain": "No, they are fully separate",
+        "technical": "No path",
+        "risk": 0.1
+      },
+      {
+        "plain": "Only through controlled points",
+        "technical": "Controlled conduits",
+        "risk": 0.4
+      },
+      {
+        "plain": "Yes, it is one network",
+        "technical": "Broad connectivity",
+        "risk": 0.95
+      }
+    ],
+    "pain": "Office and plant systems share one network",
+    "why": "Office-to-plant paths are how ransomware reaches lines that never touch email.",
+    "statement": "Office and plant systems share one network. Office-to-plant paths are how ransomware reaches lines that never touch email."
+  },
+  {
+    "id": "J1",
+    "code": "J1",
+    "areas": [
+      "P"
+    ],
+    "link": "prod",
+    "module": "Safety & physical",
+    "isNew": false,
+    "question_plain": "Could a wrong or malicious command make equipment behave unsafely?",
+    "question_technical": "Could malicious digital commands cause unsafe equipment behaviour or hazardous conditions?",
+    "options": [
+      {
+        "plain": "Yes",
+        "technical": "Yes",
+        "risk": 0.9
+      },
+      {
+        "plain": "No",
+        "technical": "No",
+        "risk": 0.1
+      }
+    ],
+    "pain": "Digital commands can create unsafe conditions",
+    "why": "Where cyber meets physical safety, consequence outranks any technical score.",
+    "statement": "Digital commands can create unsafe conditions. Where cyber meets physical safety, consequence outranks any technical score."
+  },
+  {
+    "id": "J3",
+    "code": "J3",
+    "areas": [
+      "P"
+    ],
+    "link": "prod",
+    "module": "Safety & physical",
+    "isNew": false,
+    "question_plain": "If you lose control or visibility of equipment, can it go to a safe state on its own?",
+    "question_technical": "Is there a tested safe degraded or shutdown state on loss of control/visibility?",
+    "options": [
+      {
+        "plain": "Yes, and we tested it",
+        "technical": "Tested safe state",
+        "risk": 0.1
+      },
+      {
+        "plain": "Yes, never tested",
+        "technical": "Untested",
+        "risk": 0.5
+      },
+      {
+        "plain": "No",
+        "technical": "None",
+        "risk": 0.9
+      }
+    ],
+    "pain": "No tested safe state for equipment",
+    "why": "A safe stop limits damage while systems are rebuilt.",
+    "statement": "No tested safe state for equipment. A safe stop limits damage while systems are rebuilt."
+  },
+  {
+    "id": "D4",
+    "code": "D4",
+    "areas": [
+      "P"
+    ],
+    "link": "prod",
+    "module": "Process dependency",
+    "isNew": false,
+    "question_plain": "Can the line or process keep running by hand, and for how long?",
+    "question_technical": "What is the manual / degraded-mode capacity and duration?",
+    "options": [
+      {
+        "plain": "Yes, for days",
+        "technical": "Days",
+        "risk": 0.1
+      },
+      {
+        "plain": "For a few hours",
+        "technical": "Hours",
+        "risk": 0.5
+      },
+      {
+        "plain": "No",
+        "technical": "No manual mode",
+        "risk": 0.9
+      }
+    ],
+    "pain": "No manual way to keep running",
+    "why": "Manual mode buys time for recovery.",
+    "statement": "No manual way to keep running. Manual mode buys time for recovery."
+  },
+  {
+    "id": "G4",
+    "code": "G4",
+    "areas": [
+      "P"
+    ],
+    "link": "proc",
+    "module": "Third-party & vendor",
+    "isNew": false,
+    "question_plain": "Does the same supplier or service support several of your critical processes?",
+    "question_technical": "Is there vendor concentration across multiple critical processes or sites?",
+    "options": [
+      {
+        "plain": "Yes",
+        "technical": "Concentrated",
+        "risk": 0.8
+      },
+      {
+        "plain": "No",
+        "technical": "Diversified",
+        "risk": 0.2
+      }
+    ],
+    "pain": "One provider sits behind several critical processes",
+    "why": "One provider behind many processes turns a single incident into a company-wide stop.",
+    "statement": "One provider sits behind several critical processes. One provider behind many processes turns a single incident into a company-wide stop."
+  },
+  {
+    "id": "D5",
+    "code": "D5",
+    "areas": [
+      "P"
+    ],
+    "link": "proc",
+    "module": "Process dependency",
+    "isNew": false,
+    "question_plain": "Could you move the work to another site, line, carrier or supplier?",
+    "question_technical": "Can production or service be transferred to alternate capacity?",
+    "options": [
+      {
+        "plain": "Yes, right away",
+        "technical": "Immediate",
+        "risk": 0.1
+      },
+      {
+        "plain": "Yes, with some delay",
+        "technical": "With switching time",
+        "risk": 0.45
+      },
+      {
+        "plain": "No",
+        "technical": "No alternate",
+        "risk": 0.9
+      }
+    ],
+    "pain": "No alternate site, carrier or supplier",
+    "why": "Alternate capacity is the difference between a slowdown and a stop.",
+    "statement": "No alternate site, carrier or supplier. Alternate capacity is the difference between a slowdown and a stop."
+  },
+  {
+    "id": "G3",
+    "code": "G3",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Third-party & vendor",
+    "isNew": false,
+    "question_plain": "Can you cut off a vendor's access yourself, right away?",
+    "question_technical": "Can vendor access be revoked promptly and independently?",
+    "options": [
+      {
+        "plain": "Yes",
+        "technical": "Independently, immediately",
+        "risk": 0.1
+      },
+      {
+        "plain": "Only through the vendor",
+        "technical": "Vendor-controlled",
+        "risk": 0.7
+      },
+      {
+        "plain": "We would not know how",
+        "technical": "Unknown process",
+        "risk": 0.9
+      }
+    ],
+    "pain": "You cannot cut off vendor access yourself",
+    "why": "During an incident you may need to close the door before the vendor answers the phone.",
+    "statement": "You cannot cut off vendor access yourself. During an incident you may need to close the door before the vendor answers the phone."
+  },
+  {
+    "id": "H2",
+    "code": "H2",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Identity & network",
+    "isNew": false,
+    "question_plain": "Are admin accounts separate from everyday accounts?",
+    "question_technical": "Are privileged accounts separated from standard user accounts?",
+    "options": [
+      {
+        "plain": "Yes",
+        "technical": "Separated",
+        "risk": 0.1
+      },
+      {
+        "plain": "Partly",
+        "technical": "Partial",
+        "risk": 0.5
+      },
+      {
+        "plain": "No",
+        "technical": "Not separated",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Admin rights used for everyday work",
+    "why": "Everyday accounts get phished; admin rights on them turn a phish into a takeover.",
+    "statement": "Admin rights used for everyday work. Everyday accounts get phished; admin rights on them turn a phish into a takeover."
+  },
+  {
+    "id": "F4",
+    "code": "F4",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Data & backups",
+    "isNew": false,
+    "question_plain": "How often are critical backups taken?",
+    "question_technical": "What is the backup frequency relative to the required RPO?",
+    "options": [
+      {
+        "plain": "Daily or more often",
+        "technical": "≤ 24 h",
+        "risk": 0.2
+      },
+      {
+        "plain": "Weekly",
+        "technical": "Weekly",
+        "risk": 0.6
+      },
+      {
+        "plain": "Less often",
+        "technical": "> 1 week",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Backups are taken too rarely",
+    "why": "The gap between backups is the work you would redo by hand.",
+    "statement": "Backups are taken too rarely. The gap between backups is the work you would redo by hand."
+  },
+  {
+    "id": "E4",
+    "code": "E4",
+    "areas": [
+      "P",
+      "D"
+    ],
+    "link": "org",
+    "module": "Recovery & continuity",
+    "isNew": false,
+    "question_plain": "When did you last test switching to a backup system or site?",
+    "question_technical": "When was failover / recovery last exercised?",
+    "options": [
+      {
+        "plain": "In the last 12 months",
+        "technical": "< 12 months",
+        "risk": 0.1
+      },
+      {
+        "plain": "Longer ago",
+        "technical": "> 12 months",
+        "risk": 0.6
+      },
+      {
+        "plain": "Never",
+        "technical": "Never",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Failover has never been tested",
+    "why": "Untested failover tends to fail the first time it is needed.",
+    "statement": "Failover has never been tested. Untested failover tends to fail the first time it is needed."
+  },
+  {
+    "id": "B3",
+    "code": "B3",
+    "areas": [
+      "D",
+      "P"
+    ],
+    "link": "dist",
+    "module": "Supply-chain complexity",
+    "isNew": false,
+    "question_plain": "Do outside carriers sign in to your order or tracking systems, and how?",
+    "question_technical": "How do carrier partners authenticate to your TMS/order systems?",
+    "options": [
+      {
+        "plain": "Many, with one password",
+        "technical": "Shared credentials, no MFA",
+        "risk": 0.9
+      },
+      {
+        "plain": "A few, with a second step",
+        "technical": "Individual accounts with MFA",
+        "risk": 0.3
+      },
+      {
+        "plain": "None",
+        "technical": "No carrier access",
+        "risk": 0.1
+      }
+    ],
+    "pain": "Carriers sign in with one password",
+    "why": "Carrier logins are a path into order data and shipment changes.",
+    "statement": "Carriers sign in with one password. Carrier logins are a path into order data and shipment changes."
+  },
+  {
+    "id": "D3",
+    "code": "D3",
+    "areas": [
+      "P"
+    ],
+    "link": "dist",
+    "module": "Process dependency",
+    "isNew": false,
+    "question_plain": "How much time do you have before a delay reaches your customer?",
+    "question_technical": "What buffer exists before downstream impact (time-to-propagation)?",
+    "options": [
+      {
+        "plain": "Minutes",
+        "technical": "Minutes",
+        "risk": 0.9
+      },
+      {
+        "plain": "Hours",
+        "technical": "Hours",
+        "risk": 0.6
+      },
+      {
+        "plain": "Days",
+        "technical": "Days",
+        "risk": 0.2
+      }
+    ],
+    "pain": "Delays reach customers within minutes",
+    "why": "Buffer time decides how fast a local outage becomes a customer problem.",
+    "statement": "Delays reach customers within minutes. Buffer time decides how fast a local outage becomes a customer problem."
+  },
+  {
+    "id": "B4",
+    "code": "B4",
+    "areas": [
+      "P",
+      "D"
+    ],
+    "link": "dist",
+    "module": "Supply-chain complexity",
+    "isNew": false,
+    "question_plain": "Do shipments need customs papers, permits or regulated documents to move?",
+    "question_technical": "Is product movement dependent on regulated electronic documents?",
+    "options": [
+      {
+        "plain": "Yes, digital only",
+        "technical": "Digital-only",
+        "risk": 0.8
+      },
+      {
+        "plain": "Yes, with a paper fallback",
+        "technical": "Paper fallback",
+        "risk": 0.35
+      },
+      {
+        "plain": "No",
+        "technical": "Not required",
+        "risk": 0.1
+      }
+    ],
+    "pain": "Shipments depend on digital-only documents",
+    "why": "If the document system stops, the truck stops at the border even when the goods are ready.",
+    "statement": "Shipments depend on digital-only documents. If the document system stops, the truck stops at the border even when the goods are ready."
+  },
+  {
+    "id": "FIN3",
+    "code": "FIN3",
+    "areas": [
+      "F"
+    ],
+    "link": "proc",
+    "module": "Finance & payments",
+    "isNew": true,
+    "question_plain": "Who can change supplier bank details in your system?",
+    "question_technical": "Who has write access to vendor master data in the ERP, and is it logged?",
+    "options": [
+      {
+        "plain": "A few named people, and changes are logged",
+        "technical": "Restricted and logged",
+        "risk": 0.1
+      },
+      {
+        "plain": "Many people",
+        "technical": "Broad access",
+        "risk": 0.75
+      },
+      {
+        "plain": "We are not sure",
+        "technical": "Unknown",
+        "risk": 0.8
+      }
+    ],
+    "pain": "Many people can edit supplier bank details",
+    "why": "Whoever can edit supplier records can redirect payments.",
+    "statement": "Many people can edit supplier bank details. Whoever can edit supplier records can redirect payments."
+  },
+  {
+    "id": "FIN4",
+    "code": "FIN4",
+    "areas": [
+      "F"
+    ],
+    "link": "proc",
+    "module": "Finance & payments",
+    "isNew": true,
+    "question_plain": "Would anyone notice the first payment to a new or changed bank account?",
+    "question_technical": "Are first-time payments to new or modified beneficiary accounts flagged for review?",
+    "options": [
+      {
+        "plain": "Yes, it is flagged",
+        "technical": "Automated flag",
+        "risk": 0.1
+      },
+      {
+        "plain": "Sometimes",
+        "technical": "Manual, inconsistent",
+        "risk": 0.5
+      },
+      {
+        "plain": "No",
+        "technical": "Not monitored",
+        "risk": 0.9
+      }
+    ],
+    "pain": "First payments to new accounts go unnoticed",
+    "why": "Fraudulent payments usually go to a brand-new account. Flagging it catches what approvals miss.",
+    "statement": "First payments to new accounts go unnoticed. Fraudulent payments usually go to a brand-new account. Flagging it catches what approvals miss."
+  },
+  {
+    "id": "DC1",
+    "code": "DC1",
+    "areas": [
+      "D"
+    ],
+    "link": "proc",
+    "module": "Data confidentiality",
+    "isNew": true,
+    "question_plain": "Do you share sensitive data such as designs, customer lists or prices with suppliers or partners?",
+    "question_technical": "Is sensitive data (IP, PII, pricing) shared with third parties, and under what controls?",
+    "options": [
+      {
+        "plain": "Yes, widely",
+        "technical": "Broad sharing, few controls",
+        "risk": 0.8
+      },
+      {
+        "plain": "Some, with agreements",
+        "technical": "Contractual controls",
+        "risk": 0.4
+      },
+      {
+        "plain": "No",
+        "technical": "Not shared",
+        "risk": 0.1
+      }
+    ],
+    "pain": "Sensitive data is shared widely with partners",
+    "why": "Data held by a partner can leak in their incident, not yours.",
+    "statement": "Sensitive data is shared widely with partners. Data held by a partner can leak in their incident, not yours."
+  },
+  {
+    "id": "DC2",
+    "code": "DC2",
+    "areas": [
+      "D"
+    ],
+    "link": "proc",
+    "module": "Data confidentiality",
+    "isNew": true,
+    "question_plain": "Would you find out if that data leaked from a partner?",
+    "question_technical": "Would third-party exposure of your data be detected or notified?",
+    "options": [
+      {
+        "plain": "Yes, they must tell us",
+        "technical": "Contractual notification",
+        "risk": 0.2
+      },
+      {
+        "plain": "Probably not",
+        "technical": "No mechanism",
+        "risk": 0.8
+      }
+    ],
+    "pain": "A partner leak would go unnoticed",
+    "why": "Most partner leaks are discovered months later, by someone else.",
+    "statement": "A partner leak would go unnoticed. Most partner leaks are discovered months later, by someone else."
+  },
+  {
+    "id": "H3",
+    "code": "H3",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Identity & network",
+    "isNew": false,
+    "question_plain": "Do people share logins for business systems?",
+    "question_technical": "How prevalent are shared or generic accounts?",
+    "options": [
+      {
+        "plain": "No",
+        "technical": "None",
+        "risk": 0.1
+      },
+      {
+        "plain": "A few",
+        "technical": "Limited",
+        "risk": 0.5
+      },
+      {
+        "plain": "Common",
+        "technical": "Common",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Shared logins are common",
+    "why": "Shared logins cannot be traced or revoked for one person.",
+    "statement": "Shared logins are common. Shared logins cannot be traced or revoked for one person."
+  },
+  {
+    "id": "I1",
+    "code": "I1",
+    "areas": [
+      "P",
+      "D"
+    ],
+    "link": "org",
+    "module": "Detection & response",
+    "isNew": false,
+    "question_plain": "How would you first notice that something is wrong in your systems?",
+    "question_technical": "What is the primary detection channel for abnormal behaviour?",
+    "options": [
+      {
+        "plain": "Monitoring alerts",
+        "technical": "Monitoring / alerting",
+        "risk": 0.2
+      },
+      {
+        "plain": "A staff member reports it",
+        "technical": "User report",
+        "risk": 0.55
+      },
+      {
+        "plain": "A vendor or customer tells us",
+        "technical": "External notification",
+        "risk": 0.75
+      },
+      {
+        "plain": "We probably would not",
+        "technical": "Likely undetected",
+        "risk": 0.95
+      }
+    ],
+    "pain": "Problems would be found late or by outsiders",
+    "why": "Late detection is the most common reason small incidents become long outages.",
+    "statement": "Problems would be found late or by outsiders. Late detection is the most common reason small incidents become long outages."
+  },
+  {
+    "id": "I4",
+    "code": "I4",
+    "areas": [
+      "P"
+    ],
+    "link": "org",
+    "module": "Detection & response",
+    "isNew": false,
+    "question_plain": "If email and chat are down, how would you coordinate?",
+    "question_technical": "Is an alternate communication channel defined and tested?",
+    "options": [
+      {
+        "plain": "A tested alternative",
+        "technical": "Tested",
+        "risk": 0.1
+      },
+      {
+        "plain": "An idea, never tried",
+        "technical": "Untested",
+        "risk": 0.5
+      },
+      {
+        "plain": "We have none",
+        "technical": "None",
+        "risk": 0.9
+      }
+    ],
+    "pain": "No way to coordinate without email",
+    "why": "Incidents often take email down first, exactly when people need to coordinate.",
+    "statement": "No way to coordinate without email. Incidents often take email down first, exactly when people need to coordinate."
+  },
+  {
+    "id": "I5",
+    "code": "I5",
+    "areas": [
+      "P"
+    ],
+    "link": "org",
+    "module": "Detection & response",
+    "isNew": false,
+    "question_plain": "When did you last practice a cyber disruption with the operations team?",
+    "question_technical": "When was a cyber tabletop exercise last performed?",
+    "options": [
+      {
+        "plain": "In the last 12 months",
+        "technical": "< 12 months",
+        "risk": 0.1
+      },
+      {
+        "plain": "Longer ago",
+        "technical": "> 12 months",
+        "risk": 0.6
+      },
+      {
+        "plain": "Never",
+        "technical": "Never",
+        "risk": 0.9
+      }
+    ],
+    "pain": "The team has never practiced a cyber disruption",
+    "why": "A one-hour practice exposes most gaps in a plan.",
+    "statement": "The team has never practiced a cyber disruption. A one-hour practice exposes most gaps in a plan."
+  },
+  {
+    "id": "D2",
+    "code": "D2",
+    "areas": [
+      "P"
+    ],
+    "link": "org",
+    "module": "Process dependency",
+    "isNew": false,
+    "question_plain": "Is it written down which processes and sites depend on each other?",
+    "question_technical": "Are upstream and downstream dependencies documented?",
+    "options": [
+      {
+        "plain": "Yes, up to date",
+        "technical": "Current",
+        "risk": 0.1
+      },
+      {
+        "plain": "Partly",
+        "technical": "Partial",
+        "risk": 0.5
+      },
+      {
+        "plain": "No",
+        "technical": "None",
+        "risk": 0.9
+      }
+    ],
+    "pain": "Dependencies between sites are not mapped",
+    "why": "In large networks, nobody knows the full chain unless it is written down.",
+    "statement": "Dependencies between sites are not mapped. In large networks, nobody knows the full chain unless it is written down."
+  },
+  {
+    "id": "C1b",
+    "code": "C1",
+    "areas": [
+      "P",
+      "F"
+    ],
+    "link": "main",
+    "module": "Operational impact",
+    "isNew": false,
+    "question_plain": "After one full shift without the critical process, what has happened?",
+    "question_technical": "What is the impact at the one-shift mark of the impact curve?",
+    "options": [
+      {
+        "plain": "Little, we catch up",
+        "technical": "Recoverable",
+        "risk": 0.2
+      },
+      {
+        "plain": "Orders are late",
+        "technical": "Service degraded",
+        "risk": 0.55
+      },
+      {
+        "plain": "Customers lost or penalties",
+        "technical": "Contractual / revenue loss",
+        "risk": 0.9
+      }
+    ],
+    "pain": "One lost shift means penalties or lost customers",
+    "why": "This shows how quickly an outage turns into money and customers lost.",
+    "statement": "One lost shift means penalties or lost customers. This shows how quickly an outage turns into money and customers lost."
+  },
+  {
+    "id": "A5",
+    "code": "A5",
+    "areas": [
+      "D"
+    ],
+    "link": "org",
+    "module": "Technology assets",
+    "isNew": false,
+    "question_plain": "Which protections limit an attacker on critical systems?",
+    "question_technical": "Which compensating controls materially limit exploitation (segmentation, EDR, allowlisting)?",
+    "options": [
+      {
+        "plain": "Several (endpoint protection, allowlisting, segmentation)",
+        "technical": "Layered controls",
+        "risk": 0.15
+      },
+      {
+        "plain": "Antivirus and firewall only",
+        "technical": "Baseline only",
+        "risk": 0.55
+      },
+      {
+        "plain": "Not sure what is in place",
+        "technical": "Unclear",
+        "risk": 0.8
+      }
+    ],
+    "pain": "Few protections beyond antivirus",
+    "why": "Compensating controls change how much a known vulnerability actually matters.",
+    "statement": "Few protections beyond antivirus. Compensating controls change how much a known vulnerability actually matters."
+  }
+]
