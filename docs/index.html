@@ -156,7 +156,8 @@ input[type=text],select,textarea{background:var(--bg);border:1px solid var(--lin
 .action .cost{font:500 11px var(--mono);color:var(--muted);text-align:right}
 .split{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
 .case{border:1px solid var(--line);border-radius:12px;padding:15px 16px;display:grid;gap:7px;background:var(--bg)}
-.case .split b{font:600 15px var(--display)}
+.case .split b{font:600 15px/1.35 var(--display);flex:1 1 260px;min-width:0}
+.case .cn{font:500 11px var(--mono);color:var(--accent);border:1px solid var(--line2);border-radius:6px;padding:1px 6px;margin-right:8px;vertical-align:2px}
 .match{font:500 11px var(--mono);border-radius:999px;padding:3px 10px;border:1px solid}
 .match.s{color:var(--accent);border-color:rgba(79,214,234,.5)} .match.w{color:var(--warn);border-color:rgba(242,169,59,.5)}
 .big{font:700 44px/1 var(--display);color:var(--accent)}
@@ -623,10 +624,23 @@ async function loadTrace(){
     const [T,I]=await Promise.all([fetch('trace_index.json').then(r=>{if(!r.ok)throw 0;return r.json();}),fetch('item_vectors.json').then(r=>{if(!r.ok)throw 0;return r.json();})]);
     const dec=b=>Int8Array.from(atob(b),c=>c.charCodeAt(0));      // base64 -> int8 (x127 scale)
     if(T.dim!==I.dim) throw new Error('Model mismatch: TRACE and item vectors have different sizes');
-    TRACE={meta:T.meta,tv:dec(T.vectors),iv:dec(I.vectors),idx:Object.fromEntries(I.keys.map((k,i)=>[k,i])),D:T.dim,model:T.model,boost:T.sector_boost??.03};
+    TRACE={meta:T.meta.map(m=>({...m,...splitCase(m)})),tv:dec(T.vectors),iv:dec(I.vectors),idx:Object.fromEntries(I.keys.map((k,i)=>[k,i])),D:T.dim,model:T.model,boost:T.sector_boost??.03};
     if(typeof T.strong_threshold==='number') STRONG=T.strong_threshold;
   }catch(e){ TRACE=null; }                                           // files missing -> synthetic demo cases
 }
+const DEMO_TITLE={'TR-S014':'Shared carrier passwords used to change pickups','TR-S027':'Ransomware encrypts transport management system','TR-S033':'Office ransomware spreads into plant network','TR-S041':'Sole machined-part supplier hit by ransomware','TR-S052':'Marketing partner leaks retailer customer data','TR-S058':'Cold-chain monitoring lost during IT outage','TR-S063':'Fake fuel-supplier email redirects invoice payments','TR-S070':'Hijacked mailbox requests urgent payment','TR-S077':'Records system encrypted and backups fail','TR-S081':'Customs platform outage strands trucks at the border','TR-S088':'Shared e-commerce provider outage hits retailers','TR-S094':'Vendor remote access abused on a control system','TR-S101':'No incident decision-maker lets infection spread','TR-S109':'Service provider admin account pushes malware'};
+CASES.forEach(c=>{ c.title=c.title||DEMO_TITLE[c.id]||c.id; });
+/* TRACE files store the summary as "Title. Summary"; newer exports also carry "title".
+   Split on the first sentence end that is not an abbreviation such as "U.S." or "Inc." */
+const ABBR=/(?:\b[A-Z](?:\.[A-Z])*|\b(?:Inc|Co|Corp|Ltd|St|No|Jr|Sr|vs|Dr|Mr|Ms|Mt|Ft|Gov|Dept))$/;
+function splitCase(m){
+  const s=String(m.summary||m.sum||'');
+  if(m.title) return {title:m.title,sum:s.startsWith(m.title)?s.slice(m.title.length).replace(/^[.\s]+/,''):s};
+  const re=/\.\s/g; let x;
+  while((x=re.exec(s))&&x.index<180){ if(!ABBR.test(s.slice(0,x.index))) return {title:s.slice(0,x.index),sum:s.slice(x.index+2)}; }
+  return {title:s.length>90?s.slice(0,90).replace(/\s\S*$/,'')+'…':s,sum:s};
+}
+function firstSentence(s){ const re=/\.\s/g; let x; while((x=re.exec(s))){ if(!ABBR.test(s.slice(0,x.index))) return s.slice(0,x.index+1); } return s; }
 function similar(s,r){ return TRACE?similarReal(s):similarDemo(s,r); }
 function similarReal(s){
   const {D,tv,iv,idx,meta,boost}=TRACE; const q=new Float32Array(D);
@@ -807,7 +821,7 @@ function vAssess(){
     <div class="btns"><button class="btn2" data-act="prev" ${S.cur===0?'disabled':''}>← Back</button>${S.cur<items.length-1?`<button class="btn" data-act="next">Next →</button>`:`<button class="btn" data-go="results">See provisional results →</button>`}</div>
    </section>
    <aside class="side">
-    <div class="card"><div class="lbl" style="margin-bottom:10px">Coverage of Dr. Mora's three areas</div>${covBlock(items)}<p class="help" style="margin-top:10px">Every route keeps at least three items per area.</p></div>
+    <div class="card"><div class="lbl" style="margin-bottom:10px">Main areas covered</div>${covBlock(items)}<p class="help" style="margin-top:10px">Every route keeps at least three items per area.</p></div>
     <div class="card"><div class="lbl">Your route (${items.length})</div><div class="route">${groups.map(([g,n])=>{ const xs=items.map((x,i)=>[x,i]).filter(([x])=>x.stage===g); if(!xs.length) return ''; return `<div class="grp">${n}</div>`+xs.map(([x,i])=>{ const v=S.answers[x.id]; return `<button data-jump="${i}" aria-current="${i===S.cur}"><span class="dot ${v==='u'?'u':v!==undefined?'a':''}"></span><span>${esc(text(x.id,S))}</span></button>`; }).join(''); }).join('')}</div>
     ${r.dropped.length?`<p class="help" style="margin-top:10px">${r.dropped.length} more item(s) qualified but were left out by the ${CAP}-question cap.</p>`:''}</div>
    </aside>
@@ -864,14 +878,14 @@ function diagnosis(s,R,cases){
   if(strong.length<2) return `<p>Only ${strong.length} close match${strong.length===1?'':'es'} found. SCOUT does not write an explanation when fewer than two strong matches exist; the cases are shown below for you to read.</p>`;
   const weak=R.weakest?AREAS[R.weakest]:'Production'; const top=R.pains.slice().sort((a,b)=>b.r-a.r);
   const p1=top[0], p2=top[1]; const a1=R.acts[0];
-  const cite=c=>`<cite>[${c.id}]</cite>`;
+  const cite=c=>`<cite>[${cases.indexOf(c)+1}]</cite>`;
   const dis=strong.filter(c=>c.impact==='Operational disruption');
   const terms=s.you.ops==='new';
   if(w==='technical') return `<p>Highest exposure is in <b>${weak.toLowerCase()}</b> (score ${R.area[R.weakest].score}). The primary finding is “${esc(p1?p1.title:'no pain point')}”${p2?`, compounded by “${esc(p2.title)}”`:''}.</p>
-    <p>Retrieved neighbours share the same failure pattern: ${strong.slice(0,3).map(c=>esc(c.sum.split(';')[0].toLowerCase())+' '+cite(c)).join('; ')}. ${dis.length} of ${strong.length} strong matches resulted in operational disruption.</p>
+    <p>Retrieved neighbours share the same failure pattern: ${strong.slice(0,3).map(c=>'“'+esc(c.title)+'” '+cite(c)).join('; ')}. ${dis.length} of ${strong.length} strong matches resulted in operational disruption.</p>
     <p>Recommended first control: <b>${esc(a1?a1.t:'—')}</b> (${a1?a1.fn:''}, ${a1?['','low','medium','high'][a1.cost]:''} cost).</p>`;
   return `<p>Your biggest gap is in <b>${weak.toLowerCase()}</b>. The clearest warning sign is: ${esc(p1?p1.title.toLowerCase():'none found')}${p2?`, and ${esc(p2.title.toLowerCase())}`:''}.</p>
-    <p>Companies with similar answers ran into trouble in the same way. For example: ${esc(strong[0].sum)} ${cite(strong[0])}${strong[1]?` In another case, ${esc(strong[1].sum.charAt(0).toLowerCase()+strong[1].sum.slice(1))} ${cite(strong[1])}`:''}</p>
+    <p>Companies with similar answers ran into trouble in the same way. For example, “${esc(strong[0].title)}” ${cite(strong[0])}: ${esc(firstSentence(strong[0].sum))}${strong[1]?` Another close case is “${esc(strong[1].title)}” ${cite(strong[1])}.`:''}</p>
     <p>A good first step is to <b>${esc(a1?a1.t.charAt(0).toLowerCase()+a1.t.slice(1):'answer more questions')}</b>.${terms?' (A “fallback” is the way you keep working by hand while systems are down.)':''}</p>`;
 }
 
@@ -898,7 +912,7 @@ function vAdvisor(){
     <section class="card diag"><div class="split" style="margin-bottom:10px"><span class="lbl">Diagnosis · ${wording(S)} wording</span><span class="pill fv">Generated by RAG later</span></div>${diagnosis(S,R,cases)}</section>
     ${cases.length?'':'<p class="help">Answer at least one question with a weak answer to search for similar incidents.</p>'}
     <div class="lbl">Similar cases</div>
-    ${cases.map((c,i)=>`<article class="case"><div class="split"><b>Case ${i+1} · ${esc(c.id)}</b><span class="match ${c.sim>=STRONG?'s':'w'}">${c.sim>=STRONG?'Strong':'Weak'} match · ${c.sim.toFixed(2)}</span></div><p style="margin:0">${esc(c.sum)}</p>${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener" class="mono">Source</a>`:''}<span class="mono">Sector: ${esc(SECTOR[c.sector]?SECTOR[c.sector].label:c.sector)} · Links: ${(c.links||[]).map(l=>esc(LINKNAME[l]?LINKNAME[l].split(' ')[0]:l)).join(', ')||'n/a'} · Impact: ${esc(c.impact)}</span><div class="chips" style="gap:5px">${(c.areas||[]).map(a=>`<span class="tag ${a}">${AREAS[a]}</span>`).join('')}</div></article>`).join('')}
+    ${cases.map((c,i)=>`<article class="case"><div class="split"><b title="TRACE incident ${esc(c.id)}"><span class="cn">${i+1}</span>${esc(c.title)}</b><span class="match ${c.sim>=STRONG?'s':'w'}">${c.sim>=STRONG?'Strong':'Weak'} match · ${c.sim.toFixed(2)}</span></div><p style="margin:0">${esc(c.sum)}</p>${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener" class="mono">Read the source</a>`:''}<span class="mono">Sector: ${esc(SECTOR[c.sector]?SECTOR[c.sector].label:c.sector)} · Links: ${(c.links||[]).map(l=>esc(LINKNAME[l]?LINKNAME[l].split(' ')[0]:l)).join(', ')||'n/a'} · Impact: ${esc(c.impact)}</span><div class="chips" style="gap:5px">${(c.areas||[]).map(a=>`<span class="tag ${a}">${AREAS[a]}</span>`).join('')}</div></article>`).join('')}
     <section class="card"><div class="lbl" style="margin-bottom:10px">Ask a follow-up</div><div class="chat" id="chat">${S.chat.map(m=>`<div class="bubble ${m.me?'me':''}">${m.me?esc(m.t):m.t}</div>`).join('')}</div>
      <form class="inline" id="ask" style="margin-top:10px"><input type="text" id="f-ask" placeholder="e.g. What would a small carrier do first?" aria-label="Follow-up question"><button class="btn" type="submit">Ask</button></form>
      <p class="help" style="margin-top:8px">Answers use your wording level and only what the cited cases support.</p></section>
@@ -957,10 +971,10 @@ document.addEventListener('change',e=>{ const el=e.target; if(el.tagName==='SELE
 document.addEventListener('submit',e=>{
   if(e.target.id!=='ask') return; e.preventDefault();
   const inp=$('#f-ask'); const t=inp.value.trim(); if(!t) return;
-  const R=results(S); const cases=similar(S,R).filter(c=>c.sim>=STRONG); const a=R.acts.find(x=>x.cost<=S.budget)||R.acts[0];
+  const R=results(S); const all=similar(S,R); const cases=all.filter(c=>c.sim>=STRONG); const n=c=>all.indexOf(c)+1; const a=R.acts.find(x=>x.cost<=S.budget)||R.acts[0];
   const ans=cases.length<2?'There are not enough close cases to answer that from evidence. Try answering more questions first.':
-    (wording(S)==='technical'?`Based on ${cases.length} strong matches, prioritise <b>${esc(a?a.t:'')}</b> (${a?a.fn:''}). Similar organisations that skipped this step saw longer recovery <cite>[${cases[0].id}]</cite>${cases[1]?` <cite>[${cases[1].id}]</cite>`:''}.`:
-    `The closest cases suggest starting with <b>${esc(a?a.t.charAt(0).toLowerCase()+a.t.slice(1):'')}</b>. It fits a ${['','low','medium','high'][S.budget]} budget, and companies that lacked it took longer to get back to normal <cite>[${cases[0].id}]</cite>.`);
+    (wording(S)==='technical'?`Based on ${cases.length} strong matches, prioritise <b>${esc(a?a.t:'')}</b> (${a?a.fn:''}). Similar organisations that skipped this step saw longer recovery <cite>[${n(cases[0])}]</cite>${cases[1]?` <cite>[${n(cases[1])}]</cite>`:''}.`:
+    `The closest cases suggest starting with <b>${esc(a?a.t.charAt(0).toLowerCase()+a.t.slice(1):'')}</b>. It fits a ${['','low','medium','high'][S.budget]} budget, and companies that lacked it took longer to get back to normal <cite>[${n(cases[0])}]</cite>.`);
   S.chat.push({me:true,t}); S.chat.push({me:false,t:ans+' <span class="mono">· synthetic answer; the RAG API will generate this</span>'});
   render(); const f=$('#f-ask'); if(f) f.focus();
 });
