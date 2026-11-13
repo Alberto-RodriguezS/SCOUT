@@ -231,7 +231,7 @@ The final academic report should standardize these references into the citation 
 - sources used for **questionnaire and learning-measurement design**; and
 - sources used only as **background or research context**.
 
----
+----
 
 ## Current project status
 
